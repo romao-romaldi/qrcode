@@ -1,0 +1,36 @@
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="">
+        <div id="qr-reader" class="" style="height: 350px; width: 350px;"></div>
+    </div>
+    <button id="myr">my</button>
+    <script src="./html5_qrcode.js"></script>
+    
+    <script>
+        function onScanSuccess(decodedText, decodedResult) {
+        // Handle on success condition with the decoded text or result.
+            console.log(`Scan result: ${decodedText}`, decodedResult);
+
+            if (decodedText) {
+                window.parent.postMessage({"id":decodedText}, "*");
+            }
+        }
+    
+        var html5QrcodeScanner = new Html5QrcodeScanner(
+            "qr-reader", { fps: 10, qrbox: 250 });
+        html5QrcodeScanner.render(onScanSuccess);
+
+        let myr = document.getElementById("myr");
+
+        myr.addEventListener("click", () => {
+            window.parent.postMessage({"id":"12335478654"}, "*");
+        })
+    </script>
+</body>
+</html>
+
